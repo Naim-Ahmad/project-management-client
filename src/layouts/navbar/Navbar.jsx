@@ -1,15 +1,18 @@
 import {
-    Button,
-    Collapse,
-    IconButton,
-    Navbar as StickyNavbar,
-    Typography,
+  Button,
+  Collapse,
+  IconButton,
+  Navbar as StickyNavbar,
+  Typography,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import navList from "./NavList";
+import { useSelector } from "react-redux";
+import Dropdown from "./Dropdown";
 
 export default function Navbar() {
+  const { user } = useSelector((state) => state.auth);
   const [openNav, setOpenNav] = useState(false);
 
   useEffect(() => {
@@ -31,26 +34,31 @@ export default function Navbar() {
         </Typography>
         <div className="flex items-center gap-4">
           <div className="mr-4 hidden lg:block">{navList}</div>
-          <div className="flex items-center gap-x-1">
-            <Link to="/register">
-              <Button
-                variant="text"
-                size="sm"
-                className="hidden lg:inline-block"
-              >
-                <span>Register</span>
-              </Button>
-            </Link>
-            <Link to="/login">
-              <Button
-                variant="gradient"
-                size="sm"
-                className="hidden lg:inline-block"
-              >
-                <span>Log in</span>
-              </Button>
-            </Link>
-          </div>
+          {user ? (
+            <Dropdown />
+          ) : (
+            <div className="flex items-center gap-x-1">
+              <Link to="/register">
+                <Button
+                  variant="text"
+                  size="sm"
+                  className="hidden lg:inline-block"
+                >
+                  <span>Register</span>
+                </Button>
+              </Link>
+              <Link to="/login">
+                <Button
+                  variant="gradient"
+                  size="sm"
+                  className="hidden lg:inline-block"
+                >
+                  <span>Log in</span>
+                </Button>
+              </Link>
+            </div>
+          )}
+
           <IconButton
             variant="text"
             className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -94,12 +102,12 @@ export default function Navbar() {
         {navList}
         <div className="flex items-center gap-x-1">
           <Link className="flex-1" to="/register">
-            <Button fullWidth variant="text" size="sm" className="">
+            <Button fullWidth variant="text" size="sm">
               <span>Register</span>
             </Button>
           </Link>
           <Link className="flex-1" to="/login">
-            <Button fullWidth variant="gradient" size="sm" className="">
+            <Button fullWidth variant="gradient" size="sm">
               <span>Log in</span>
             </Button>
           </Link>
