@@ -16,7 +16,7 @@ export function NotificationDialog({ modalOpen, handleOpen, url }) {
   };
   return (
     <>
-      <Dialog open={modalOpen} handler={handleOpen}>
+      <Dialog open={modalOpen}>
         <DialogHeader>
           <Typography variant="h5" color="blue-gray">
             Your Attention is Required!
