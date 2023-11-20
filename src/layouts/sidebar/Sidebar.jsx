@@ -49,7 +49,7 @@ export function Sidebar() {
     <Card className="h-screen w-full max-w-xs p-4 rounded-none  bg-white shadow text-color-gray">
       <div className="mb-2 p-4">
         <Typography variant="h5" color="blue-gray">
-          Sidebar
+          MERN
         </Typography>
       </div>
       <List className="text-color-gray dashbordside">
