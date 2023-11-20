@@ -1,4 +1,6 @@
+import { Outlet } from "react-router-dom";
 import { Sidebar } from "./sidebar/Sidebar";
+import DashboardNav from "./dashboardNav/DashboardNav";
 
 const DashbordLayout = () => {
   return (
@@ -6,11 +8,11 @@ const DashbordLayout = () => {
       <div className="max-w-xs">
         <Sidebar />
       </div>
-      <div className="bg-[#EEF1F3]">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum sapiente
-        consectetur quas! Nostrum mollitia nesciunt architecto, quos enim
-        ducimus consequatur nihil atque dolorem nam! Non explicabo suscipit vel!
-        Laboriosam, adipisci.
+      <div className="bg-[#EEF1F3] flex-grow">
+        <DashboardNav />
+        <div className="p-4">
+          <Outlet />
+        </div>
       </div>
     </section>
   );
