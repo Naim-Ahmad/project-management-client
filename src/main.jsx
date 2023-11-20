@@ -1,17 +1,16 @@
 import { ThemeProvider } from "@material-tailwind/react";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { RouterProvider } from "react-router-dom";
 import "./index.css";
-import router from "./routes/Routes.jsx";
 import { Provider } from "react-redux";
 import store from "./redux/app/store.jsx";
+import App from "./App.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider>
       <Provider store={store}>
-        <RouterProvider router={router} />
+        <App />
       </Provider>
     </ThemeProvider>
   </React.StrictMode>

@@ -100,18 +100,20 @@ export default function Navbar() {
       </div>
       <Collapse open={openNav}>
         {navList}
-        <div className="flex items-center gap-x-1">
-          <Link className="flex-1" to="/register">
-            <Button fullWidth variant="text" size="sm">
-              <span>Register</span>
-            </Button>
-          </Link>
-          <Link className="flex-1" to="/login">
-            <Button fullWidth variant="gradient" size="sm">
-              <span>Log in</span>
-            </Button>
-          </Link>
-        </div>
+        {!user && (
+          <div className="flex items-center gap-x-1">
+            <Link className="flex-1" to="/register">
+              <Button fullWidth variant="text" size="sm">
+                <span>Register</span>
+              </Button>
+            </Link>
+            <Link className="flex-1" to="/login">
+              <Button fullWidth variant="gradient" size="sm">
+                <span>Log in</span>
+              </Button>
+            </Link>
+          </div>
+        )}
       </Collapse>
     </StickyNavbar>
   );

@@ -17,6 +17,15 @@ const authApi = api.injectEndpoints({
         body: data,
       }),
     }),
+    profile: builder.mutation({
+      query: () => ({
+        url: "/auth/varifyLogin",
+        method: "POST",
+        credentials: "include",
+        body: {},
+      }),
+    }),
   }),
 });
-export const { useSignupMutation, useLoginMutation } = authApi;
+export const { useSignupMutation, useLoginMutation, useProfileMutation } =
+  authApi;
