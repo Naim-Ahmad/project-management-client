@@ -10,12 +10,23 @@ import {
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import svg from "../../assets/nophoto.webp";
+import { useLogoutMutation } from "../../redux/features/auth/authApi";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/features/auth/authSlice";
 
 // routes
 const settings = ["Profile", "Account", "Dashboard"];
 
 export default function Dropdown() {
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [logout] = useLogoutMutation();
+  const dispatch = useDispatch();
+
+  const handelLogout = () => {
+    logout();
+    dispatch(setUser(null));
+    setAnchorElUser(null);
+  };
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -56,7 +67,7 @@ export default function Dropdown() {
               <NavLink to={`/${setting.toLowerCase()}`}>{setting}</NavLink>
             </MenuItem>
           ))}
-          <MenuItem onClick={handleCloseUserMenu}>
+          <MenuItem onClick={handelLogout}>
             <Typography textAlign="center">Logout</Typography>
           </MenuItem>
         </Menu>
