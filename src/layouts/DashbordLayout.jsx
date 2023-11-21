@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 
 const DashbordLayout = () => {
   const { showNav } = useSelector((state) => state.dashboard);
+  const { user } = useSelector((state) => state.auth);
+  if (!user) return <div>Auth checking...</div>;
   return (
     <section className="flex">
       {showNav && (

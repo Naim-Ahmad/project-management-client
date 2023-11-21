@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginimg from "../../assets/auth.svg";
 import AuthImage from "../../components/AuthImage/AuthImage";
 import { useForm } from "react-hook-form";
@@ -18,6 +18,8 @@ export default function Login() {
   const [modalOpen, setmodalOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { state } = useLocation();
+  const navigateto = state?.from || "/";
 
   // form control logic
   const {
@@ -49,7 +51,7 @@ export default function Login() {
           reset();
           setmodalOpen(true);
         } else {
-          navigate("/");
+          navigate(navigateto);
         }
       }
       if (data?.message) {
@@ -66,7 +68,7 @@ export default function Login() {
           <NotificationDialog
             modalOpen={modalOpen}
             handleOpen={() => setmodalOpen(!modalOpen)}
-            url={"/"}
+            url={navigateto}
           />
         )}
 
