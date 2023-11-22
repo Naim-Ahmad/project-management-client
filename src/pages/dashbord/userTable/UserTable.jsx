@@ -146,9 +146,9 @@ export default function EmployeeTable({
           </thead>
           <tbody>
             {results?.users?.length == 0 && (
-              <span className="text-lg text-center font-bold capitalize">
-                no Data Found
-              </span>
+              <tr className="text-lg text-center font-bold capitalize">
+                <td> no Data Found</td>
+              </tr>
             )}
             {results?.users?.map(
               (

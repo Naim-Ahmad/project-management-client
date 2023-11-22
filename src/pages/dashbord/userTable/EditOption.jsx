@@ -7,9 +7,18 @@ import {
   MenuList,
   Tooltip,
 } from "@material-tailwind/react";
+import { useUpdateEmployeeMutation } from "../../../redux/features/dashboard/dashboardApi";
 
 const EditOption = ({ user }) => {
   const { _id, role, isVarified } = user;
+  const [updateEmployee] = useUpdateEmployeeMutation();
+
+  const handelVarified = () => {
+    const updatedData = {
+      isVarified: true,
+    };
+    updateEmployee({ _id, updatedData });
+  };
 
   return (
     <Menu placement="right-end" className="capitalize">
@@ -21,7 +30,9 @@ const EditOption = ({ user }) => {
         </MenuHandler>
       </Tooltip>
       <MenuList className="capitalize">
-        {!isVarified && <MenuItem> Make as varified</MenuItem>}
+        {!isVarified && (
+          <MenuItem onClick={handelVarified}> Make as varified</MenuItem>
+        )}
 
         {isVarified && (
           <MenuItem>
