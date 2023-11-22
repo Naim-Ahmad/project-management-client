@@ -1,5 +1,14 @@
+import { useGetEmployeesQuery } from "../../redux/features/dashboard/dashboardApi";
+import EmployeeTable from "./userTable/UserTable";
+
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  const { data: users } = useGetEmployeesQuery();
+
+  return (
+    <div className="h-screen">
+      <EmployeeTable users={users} />
+    </div>
+  );
 };
 
 export default Dashboard;

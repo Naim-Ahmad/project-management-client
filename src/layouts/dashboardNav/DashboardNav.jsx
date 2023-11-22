@@ -14,7 +14,7 @@ const DashboardNav = () => {
     dispatch(setShowNav());
   };
   return (
-    <nav className="border-b border-[#E3EBF6] shadow text-blue-300">
+    <nav className="border-b border-[#E3EBF6] shadow text-blue-300 sticky top-0 z-40 bg-white">
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center space-x-10">
           <IoIosMenu
