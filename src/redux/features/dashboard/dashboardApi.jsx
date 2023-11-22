@@ -3,8 +3,8 @@ import api from "../api/api";
 const dashboardApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getEmployees: builder.query({
-      query: () => ({
-        url: "/employee",
+      query: (query) => ({
+        url: `/employee${query}`,
         method: "GET",
         credentials: "include",
       }),

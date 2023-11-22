@@ -10,8 +10,9 @@ import {
 
 const EditOption = ({ user }) => {
   const { _id, role, isVarified } = user;
+
   return (
-    <Menu placement="right-end">
+    <Menu placement="right-end" className="capitalize">
       <Tooltip content="Edit User">
         <MenuHandler>
           <IconButton variant="text">
@@ -19,10 +20,16 @@ const EditOption = ({ user }) => {
           </IconButton>
         </MenuHandler>
       </Tooltip>
-      <MenuList>
-        <MenuItem>Menu Item 1</MenuItem>
-        <MenuItem>Menu Item 2</MenuItem>
-        <MenuItem>Menu Item 3</MenuItem>
+      <MenuList className="capitalize">
+        {!isVarified && <MenuItem> Make as varified</MenuItem>}
+
+        {isVarified && (
+          <MenuItem>
+            {role == "employee" ? "Promot to manager" : "Demote to employee"}
+          </MenuItem>
+        )}
+
+        <MenuItem className="text-red-500">Delete</MenuItem>
       </MenuList>
     </Menu>
   );

@@ -16,25 +16,70 @@ import {
 } from "@material-tailwind/react";
 import moment from "moment/moment";
 import EditOption from "./EditOption";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const TABS = [
   {
-    label: "All",
-    value: "all",
+    label: "Employee",
+    value: "employee",
   },
   {
-    label: "Monitored",
-    value: "monitored",
+    label: "Manager",
+    value: "manager",
   },
   {
-    label: "Unmonitored",
-    value: "unmonitored",
+    label: "Panding",
+    value: "notvarified",
   },
 ];
 
 const TABLE_HEAD = ["Employee", "Role", "Status", "Join Date", ""];
 
-export default function EmployeeTable({ users }) {
+export default function EmployeeTable({
+  results,
+  setrole,
+  setvarified,
+  currentPage,
+  setCurrentPage,
+  setName,
+}) {
+  const { user } = useSelector((state) => state.auth);
+
+  const [itemPerPage] = useState(8);
+  const totalPage = Math.ceil(results?.count / itemPerPage);
+
+  // this funtion willbe handel set query
+  const handelSetQuery = (value) => {
+    if (value === "notvarified") {
+      setCurrentPage(1);
+      setrole("employee");
+      setvarified(false);
+    } else {
+      setCurrentPage(1);
+      setrole(value);
+      setvarified(true);
+    }
+  };
+
+  const handelSetCurrentPage = (page) => {
+    setCurrentPage(page);
+  };
+
+  // debounce handeling for input box
+  function debounce(func, timeout = 300) {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func.apply(this, args);
+      }, timeout);
+    };
+  }
+  function saveInput(value) {
+    setName(value);
+  }
+  const handelOnchange = debounce((value) => saveInput(value));
   return (
     <Card className=" w-full z-0">
       <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -57,10 +102,14 @@ export default function EmployeeTable({ users }) {
           </div>
         </div>
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-          <Tabs value="all" className="w-full md:w-max">
+          <Tabs value="employee" className="w-full md:w-max">
             <TabsHeader>
               {TABS.map(({ label, value }) => (
-                <Tab key={value} value={value}>
+                <Tab
+                  key={value}
+                  value={value}
+                  onClick={() => handelSetQuery(value)}
+                >
                   &nbsp;&nbsp;{label}&nbsp;&nbsp;
                 </Tab>
               ))}
@@ -69,6 +118,7 @@ export default function EmployeeTable({ users }) {
           <div className="w-full md:w-72">
             <Input
               label="Search"
+              onChange={(e) => handelOnchange(e.target.value)}
               icon={<MagnifyingGlassIcon className="h-5 w-5" />}
             />
           </div>
@@ -95,7 +145,12 @@ export default function EmployeeTable({ users }) {
             </tr>
           </thead>
           <tbody>
-            {users?.map(
+            {results?.users?.length == 0 && (
+              <span className="text-lg text-center font-bold capitalize">
+                no Data Found
+              </span>
+            )}
+            {results?.users?.map(
               (
                 {
                   _id,
@@ -108,7 +163,7 @@ export default function EmployeeTable({ users }) {
                 },
                 index
               ) => {
-                const isLast = index === users.length - 1;
+                const isLast = index === results.length - 1;
                 const classes = isLast
                   ? "p-4"
                   : "p-4 border-b border-blue-gray-50";
@@ -171,7 +226,12 @@ export default function EmployeeTable({ users }) {
                       </Typography>
                     </td>
                     <td className={classes}>
-                      <EditOption user={{ _id, role, isVarified }} />
+                      {/* action */}
+                      {user?.email == email ? (
+                        <p>You</p>
+                      ) : (
+                        <EditOption user={{ _id, role, isVarified }} />
+                      )}
                     </td>
                   </tr>
                 );
@@ -182,13 +242,23 @@ export default function EmployeeTable({ users }) {
       </CardBody>
       <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
         <Typography variant="small" color="blue-gray" className="font-normal">
-          Page 1 of 10
+          Page {currentPage} of {totalPage}
         </Typography>
         <div className="flex gap-2">
-          <Button variant="outlined" size="sm">
+          <Button
+            variant="outlined"
+            size="sm"
+            disabled={currentPage === 1}
+            onClick={() => handelSetCurrentPage(currentPage - 1)}
+          >
             Previous
           </Button>
-          <Button variant="outlined" size="sm">
+          <Button
+            variant="outlined"
+            size="sm"
+            disabled={currentPage === totalPage}
+            onClick={() => handelSetCurrentPage(currentPage + 1)}
+          >
             Next
           </Button>
         </div>
