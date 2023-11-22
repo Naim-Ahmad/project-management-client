@@ -24,6 +24,7 @@ const dashboardApi = api.injectEndpoints({
         try {
           const { data } = await queryFulfilled;
           if (data?.modifiedCount == 1) {
+            // first update
             dispatch(
               api.util.updateQueryData(
                 "getEmployees",
@@ -42,7 +43,41 @@ const dashboardApi = api.injectEndpoints({
         }
       },
     }),
+    deleteEmployee: builder.mutation({
+      query: (_id) => ({
+        url: `/employee/${_id}`,
+        method: "DELETE",
+        credentials: "include",
+      }),
+      // passimistik cach update
+      async onQueryStarted(arg, { queryFulfilled, dispatch, getState }) {
+        try {
+          const { data } = await queryFulfilled;
+          if (data?.deletedCount == 1) {
+            dispatch(
+              api.util.updateQueryData(
+                "getEmployees",
+                getState().dashboard.query,
+                (draft) => {
+                  const oldData = draft?.users;
+                  const index = oldData.findIndex((user) => user._id == arg);
+                  if (index != -1) {
+                    oldData.splice(index, 1);
+                  }
+                }
+              )
+            );
+          }
+        } catch {
+          console.log("error");
+        }
+      },
+    }),
   }),
 });
 
-export const { useGetEmployeesQuery, useUpdateEmployeeMutation } = dashboardApi;
+export const {
+  useGetEmployeesQuery,
+  useUpdateEmployeeMutation,
+  useDeleteEmployeeMutation,
+} = dashboardApi;

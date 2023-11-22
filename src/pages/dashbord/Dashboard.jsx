@@ -6,7 +6,7 @@ import { setQuery } from "../../redux/features/dashboard/dashboardSlice";
 
 const Dashboard = () => {
   const { query } = useSelector((state) => state.dashboard);
-  const { data: results, isLoading } = useGetEmployeesQuery(query);
+  const { data: results, isLoading, refetch } = useGetEmployeesQuery(query);
   const [varified, setvarified] = useState(true);
   const [role, setrole] = useState("employee");
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,6 +34,7 @@ const Dashboard = () => {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           setName={setName}
+          refetch={refetch}
         />
       )}
     </div>
