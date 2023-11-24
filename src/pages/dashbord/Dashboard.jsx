@@ -11,16 +11,17 @@ const Dashboard = () => {
   const [role, setrole] = useState("employee");
   const [currentPage, setCurrentPage] = useState(1);
   const [name, setName] = useState("");
+  const [sort, setSort] = useState("asc");
 
   const dispatch = useDispatch();
   // this hook only will fire when it dependency will update
   useEffect(() => {
     dispatch(
       setQuery(
-        `?varified=${varified}&role=${role}&name=${name}&page=${currentPage}`
+        `?varified=${varified}&role=${role}&name=${name}&page=${currentPage}&sort=${sort}`
       )
     );
-  }, [varified, role, dispatch, currentPage, name]);
+  }, [varified, role, dispatch, currentPage, name, sort]);
 
   return (
     <div className="h-screen">
@@ -35,6 +36,8 @@ const Dashboard = () => {
           setCurrentPage={setCurrentPage}
           setName={setName}
           refetch={refetch}
+          sort={sort}
+          setSort={setSort}
         />
       )}
     </div>

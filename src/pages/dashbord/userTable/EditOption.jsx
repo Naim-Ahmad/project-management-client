@@ -38,6 +38,13 @@ const EditOption = ({ user }) => {
     };
     updateEmployee({ _id, updatedData });
   };
+  // make employee to manager
+  const handelRole = (role) => {
+    const updatedData = {
+      role: role == "manager" ? "employee" : "manager",
+    };
+    updateEmployee({ _id, updatedData });
+  };
 
   const handelDelete = () => {
     Swal.fire({
@@ -70,7 +77,7 @@ const EditOption = ({ user }) => {
         )}
 
         {isVarified && (
-          <MenuItem>
+          <MenuItem onClick={() => handelRole(role)}>
             {role == "employee" ? "Promot to manager" : "Demote to employee"}
           </MenuItem>
         )}

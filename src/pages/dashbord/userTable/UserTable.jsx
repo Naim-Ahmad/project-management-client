@@ -18,7 +18,8 @@ import moment from "moment/moment";
 import EditOption from "./EditOption";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-
+import { IoIosArrowRoundDown, IoIosArrowRoundUp } from "react-icons/io";
+import classNames from "classnames";
 const TABS = [
   {
     label: "Employee",
@@ -44,6 +45,8 @@ export default function EmployeeTable({
   setCurrentPage,
   setName,
   refetch,
+  setSort,
+  sort,
 }) {
   const { user } = useSelector((state) => state.auth);
 
@@ -81,6 +84,12 @@ export default function EmployeeTable({
     setName(value);
   }
   const handelOnchange = debounce((value) => saveInput(value));
+
+  // handel sort value
+  const handelSort = () => {
+    setSort(sort == "desc" ? "asc" : "desc");
+  };
+
   return (
     <Card className=" w-full z-0">
       <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -152,9 +161,25 @@ export default function EmployeeTable({
                   <Typography
                     variant="small"
                     color="blue-gray"
-                    className="font-normal leading-none opacity-70"
+                    onClick={head == "Employee" ? handelSort : () => ""}
+                    className={classNames({
+                      "font-normal leading-none opacity-70 flex items-center": true,
+                      "cursor-pointer": head == "Employee",
+                    })}
                   >
-                    {head}
+                    {head}{" "}
+                    {head == "Employee" &&
+                      (sort == "desc" ? (
+                        <IoIosArrowRoundDown
+                          className="text-lg"
+                          // onClick={handelSort}
+                        />
+                      ) : (
+                        <IoIosArrowRoundUp
+                          className="text-lg"
+                          // onClick={handelSort}
+                        />
+                      ))}
                   </Typography>
                 </th>
               ))}
