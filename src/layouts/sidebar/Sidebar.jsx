@@ -15,9 +15,15 @@ import {
 } from "@heroicons/react/24/solid";
 import { NavLink, useLocation } from "react-router-dom";
 import classNames from "classnames";
+import { useLogoutMutation } from "../../redux/features/auth/authApi";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/features/auth/authSlice";
 
 export function Sidebar() {
   const { pathname } = useLocation();
+  const [logout] = useLogoutMutation();
+  const dispatch = useDispatch();
+
   const sidebarLinks = [
     {
       label: "Dashboard",
@@ -45,6 +51,11 @@ export function Sidebar() {
       icon: <Cog6ToothIcon className="h-5 w-5" />,
     },
   ];
+
+  const handelLogout = () => {
+    logout();
+    dispatch(setUser(null));
+  };
   return (
     <Card className="h-screen w-full max-w-xs p-4 rounded-none  bg-white shadow text-color-gray">
       <div className="mb-2 p-4">
@@ -67,7 +78,10 @@ export function Sidebar() {
           </ListItem>
         ))}
 
-        <ListItem className="hover:bg-cyan-800 hover:text-white">
+        <ListItem
+          className="hover:bg-cyan-800 hover:text-white"
+          onClick={handelLogout}
+        >
           <ListItemPrefix>
             <PowerIcon className="h-5 w-5" />
           </ListItemPrefix>
