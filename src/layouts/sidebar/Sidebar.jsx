@@ -3,8 +3,7 @@ import {
   InboxIcon,
   PowerIcon,
   PresentationChartBarIcon,
-  ShoppingBagIcon,
-  UserCircleIcon,
+  UserCircleIcon
 } from "@heroicons/react/24/solid";
 import {
   Card,
@@ -14,6 +13,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import classNames from "classnames";
+import { FaTasks } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
 import { useLogoutMutation } from "../../redux/features/auth/authApi";
@@ -31,9 +31,9 @@ export function Sidebar() {
       icon: <PresentationChartBarIcon className="h-5 w-5" />,
     },
     {
-      label: "E-Commerce",
-      href: "/dashboard/ecommerce",
-      icon: <ShoppingBagIcon className="h-5 w-5" />,
+      label: "Projects",
+      href: "/dashboard/projects",
+      icon: <FaTasks className="h-3 w-3" />,
     },
     {
       label: "Inbox",
@@ -66,8 +66,9 @@ export function Sidebar() {
       </div>
       <List className="text-color-gray dashbordside">
         {sidebarLinks.map((item) => (
+          <NavLink key={item.label} to={item.href}> 
           <ListItem
-            key={item.label}
+            
             className={classNames({
               "text-color-gray": true,
               "hover:bg-cyan-800 hover:text-white": true,
@@ -75,8 +76,9 @@ export function Sidebar() {
             })}
           >
             <ListItemPrefix>{item.icon}</ListItemPrefix>
-            <NavLink to={item.href}> {item.label}</NavLink>
+            {item.label}
           </ListItem>
+          </NavLink>
         ))}
 
         <ListItem
