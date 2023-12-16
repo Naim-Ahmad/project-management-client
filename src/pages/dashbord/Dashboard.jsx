@@ -22,7 +22,7 @@ const Dashboard = () => {
       )
     );
   }, [varified, role, dispatch, currentPage, name, sort]);
-
+// main function
   return (
     <div className="h-screen">
       {isLoading ? (
