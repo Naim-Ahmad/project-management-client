@@ -30,8 +30,8 @@ const TABS = [
     value: "manager",
   },
   {
-    label: "Panding",
-    value: "notvarified",
+    label: "Pending",
+    value: "notverified",
   },
 ];
 
@@ -40,7 +40,7 @@ const TABLE_HEAD = ["Employee", "Role", "Status", "Join Date", ""];
 export default function EmployeeTable({
   results,
   setrole,
-  setvarified,
+  setverified,
   currentPage,
   setCurrentPage,
   setName,
@@ -53,16 +53,16 @@ export default function EmployeeTable({
   const [itemPerPage] = useState(8);
   const totalPage = Math.ceil(results?.count / itemPerPage);
 
-  // this funtion willbe handel set query
+  // this function willbe handel set query
   const handelSetQuery = (value) => {
-    if (value === "notvarified") {
+    if (value === "notverified") {
       setCurrentPage(1);
       setrole("employee");
-      setvarified(false);
+      setverified(false);
     } else {
       setCurrentPage(1);
       setrole(value);
-      setvarified(true);
+      setverified(true);
     }
   };
 
@@ -199,7 +199,7 @@ export default function EmployeeTable({
                   lastName,
                   email,
                   role,
-                  isVarified,
+                  isVerified,
                   createdAt,
                 },
                 index
@@ -252,8 +252,8 @@ export default function EmployeeTable({
                         <Chip
                           variant="ghost"
                           size="sm"
-                          value={isVarified ? "Varified" : "Not Varified"}
-                          color={isVarified ? "green" : "red"}
+                          value={isVerified ? "Verified" : "Not Verified"}
+                          color={isVerified ? "green" : "red"}
                         />
                       </div>
                     </td>
@@ -271,7 +271,7 @@ export default function EmployeeTable({
                       {user?.email == email ? (
                         <p>You</p>
                       ) : (
-                        <EditOption user={{ _id, role, isVarified }} />
+                        <EditOption user={{ _id, role, isVerified }} />
                       )}
                     </td>
                   </tr>

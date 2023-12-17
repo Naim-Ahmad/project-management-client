@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   showNav: true,
-  query: "?varified=true&role=employee&name=''&page=1&sort=asc",
+  query: "?verified=true&role=employee&name=''&page=1&sort=asc",
 };
 const dashboardSlice = createSlice({
   name: "dashboard",

@@ -1,22 +1,22 @@
 import {
-  Card,
-  Typography,
-  List,
-  ListItem,
-  ListItemPrefix,
-} from "@material-tailwind/react";
-import {
-  PresentationChartBarIcon,
-  ShoppingBagIcon,
-  UserCircleIcon,
   Cog6ToothIcon,
   InboxIcon,
   PowerIcon,
+  PresentationChartBarIcon,
+  ShoppingBagIcon,
+  UserCircleIcon,
 } from "@heroicons/react/24/solid";
-import { NavLink, useLocation } from "react-router-dom";
+import {
+  Card,
+  List,
+  ListItem,
+  ListItemPrefix,
+  Typography,
+} from "@material-tailwind/react";
 import classNames from "classnames";
-import { useLogoutMutation } from "../../redux/features/auth/authApi";
 import { useDispatch } from "react-redux";
+import { NavLink, useLocation } from "react-router-dom";
+import { useLogoutMutation } from "../../redux/features/auth/authApi";
 import { setUser } from "../../redux/features/auth/authSlice";
 
 export function Sidebar() {
@@ -56,8 +56,9 @@ export function Sidebar() {
     logout();
     dispatch(setUser(null));
   };
+
   return (
-    <Card className="h-screen w-full max-w-xs p-4 rounded-none  bg-white shadow text-color-gray">
+    <Card className=" sticky w-full max-w-xs p-4 rounded-none  bg-white shadow text-color-gray">
       <div className="mb-2 p-4">
         <Typography variant="h5" color="blue-gray">
           MERN
