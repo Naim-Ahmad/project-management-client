@@ -1,12 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
+import DashbordLayout from "../layouts/DashbordLayout";
 import MainLayout from "../layouts/MainLayout";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
-import Home from "../pages/home/Home";
-import DashbordLayout from "../layouts/DashbordLayout";
 import Dashboard from "../pages/dashbord/Dashboard";
-import PublicRoute from "./PublicRoute";
+import Projects from "../pages/dashbord/workSpace/Projects";
+import Home from "../pages/home/Home";
 import ManagerRoute from "./ManagerRoute";
+import PublicRoute from "./PublicRoute";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,14 @@ const router = createBrowserRouter([
         element: (
           <ManagerRoute>
             <Dashboard />
+          </ManagerRoute>
+        ),
+      },
+      {
+        path: "projects",
+        element: (
+          <ManagerRoute>
+            <Projects />
           </ManagerRoute>
         ),
       },

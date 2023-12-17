@@ -1,15 +1,17 @@
 import { Badge } from "@material-tailwind/react";
-import {
-  IoIosMenu,
-  IoMdNotificationsOutline,
-  IoMdSearch,
-} from "react-icons/io";
 import { GoPlus } from "react-icons/go";
-import { useDispatch } from "react-redux";
+import {
+  IoMdNotificationsOutline,
+  IoMdSearch
+} from "react-icons/io";
+import { LuPanelLeftClose, LuPanelRightClose } from "react-icons/lu";
+import { useDispatch, useSelector } from "react-redux";
 import { setShowNav } from "../../redux/features/dashboard/dashboardSlice";
 
 const DashboardNav = () => {
   const dispatch = useDispatch();
+  const {showNav} = useSelector((state)=> state.dashboard)
+  // console.log(showNav)
   const handelNavbar = () => {
     dispatch(setShowNav());
   };
@@ -17,14 +19,18 @@ const DashboardNav = () => {
     <nav className="border-b border-[#E3EBF6] shadow text-blue-300 sticky top-0 z-40 bg-white">
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center space-x-10">
-          <IoIosMenu
+          {showNav ? <LuPanelLeftClose
             size={25}
             className="cursor-pointer"
             onClick={handelNavbar}
-          />
+          /> : <LuPanelRightClose
+          size={25}
+          className="cursor-pointer"
+          onClick={handelNavbar}
+        />}
           <div className="flex items-center space-x-2 bg-blue-100 px-2 py-1 text-blue-700 text-xs rounded cursor-pointer">
             <GoPlus className="font-semibold text-lg" />
-            <span>New Task</span>
+            <span>New Project</span>
           </div>
         </div>
         <div>
