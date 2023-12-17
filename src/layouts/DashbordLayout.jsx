@@ -10,7 +10,7 @@ const DashbordLayout = () => {
   return (
     <section className=" flex ">
       {showNav && (
-        <div className="sticky top-0 h-[90vh] transition-all duration-300">
+        <div className="absolute lg:sticky top-0 h-[90vh] transition-all duration-300">
           <Sidebar />
         </div>
       )}
