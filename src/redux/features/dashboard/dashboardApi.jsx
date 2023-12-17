@@ -8,6 +8,7 @@ const dashboardApi = api.injectEndpoints({
         method: "GET",
         credentials: "include",
       }),
+      providesTags: ["Employees"],
     }),
     updateEmployee: builder.mutation({
       query: ({ _id, updatedData }) => ({
@@ -16,32 +17,33 @@ const dashboardApi = api.injectEndpoints({
         credentials: "include",
         body: updatedData,
       }),
-      // passimistik cach update
-      async onQueryStarted(
-        { _id, updatedData },
-        { queryFulfilled, dispatch, getState }
-      ) {
-        try {
-          const { data } = await queryFulfilled;
-          if (data?.modifiedCount == 1) {
-            // first update
-            dispatch(
-              api.util.updateQueryData(
-                "getEmployees",
-                getState().dashboard.query,
-                (draft) => {
-                  const prevData = draft?.users?.find(
-                    (user) => user._id == _id
-                  );
-                  Object.assign(prevData, updatedData);
-                }
-              )
-            );
-          }
-        } catch {
-          console.log("error");
-        }
-      },
+      invalidatesTags: ["Employees"],
+      // pessimistic cache update
+      // async onQueryStarted(
+      //   { _id, updatedData },
+      //   { queryFulfilled, dispatch, getState }
+      // ) {
+      //   try {
+      //     const { data } = await queryFulfilled;
+      //     if (data?.modifiedCount == 1) {
+      //       // first update
+      //       dispatch(
+      //         api.util.updateQueryData(
+      //           "getEmployees",
+      //           getState().dashboard.query,
+      //           (draft) => {
+      //             const prevData = draft?.users?.find(
+      //               (user) => user._id == _id
+      //             );
+      //             Object.assign(prevData, updatedData);
+      //           }
+      //         )
+      //       );
+      //     }
+      //   } catch {
+      //     console.log("error");
+      //   }
+      // },
     }),
     deleteEmployee: builder.mutation({
       query: (_id) => ({
@@ -49,7 +51,9 @@ const dashboardApi = api.injectEndpoints({
         method: "DELETE",
         credentials: "include",
       }),
-      // passimistik cach update
+      // invalidatesTags: ["Employees"],
+
+      // pessimistic cache update
       async onQueryStarted(arg, { queryFulfilled, dispatch, getState }) {
         try {
           const { data } = await queryFulfilled;

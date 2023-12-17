@@ -36,10 +36,10 @@ export function NotificationDialog({ modalOpen, handleOpen, url }) {
             />
           </svg>
           <Typography color="red" variant="h4">
-            Your Account is Not varified !
+            Your Account is Not verified !
           </Typography>
           <Typography className="text-center font-normal">
-            please contact admin (01941758333) for varify your account !
+            please contact admin (01941758333) for verify your account !
           </Typography>
         </DialogBody>
         <DialogFooter className="space-x-2">

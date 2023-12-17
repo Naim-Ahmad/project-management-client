@@ -15,7 +15,7 @@ import Swal from "sweetalert2";
 import { useEffect } from "react";
 
 const EditOption = ({ user }) => {
-  const { _id, role, isVarified } = user;
+  const { _id, role, isVerified } = user;
   const [updateEmployee] = useUpdateEmployeeMutation();
   const [deleteEmployee, { data }] = useDeleteEmployeeMutation();
 
@@ -31,10 +31,10 @@ const EditOption = ({ user }) => {
     }
   }, [data]);
 
-  // this will make user varified
-  const handelVarified = () => {
+  // this will make user verified
+  const handelVerified = () => {
     const updatedData = {
-      isVarified: true,
+      isVerified: true,
     };
     updateEmployee({ _id, updatedData });
   };
@@ -72,13 +72,13 @@ const EditOption = ({ user }) => {
         </MenuHandler>
       </Tooltip>
       <MenuList className="capitalize">
-        {!isVarified && (
-          <MenuItem onClick={handelVarified}> Make as varified</MenuItem>
+        {!isVerified && (
+          <MenuItem onClick={handelVerified}> Make as verified</MenuItem>
         )}
 
-        {isVarified && (
+        {isVerified && (
           <MenuItem onClick={() => handelRole(role)}>
-            {role == "employee" ? "Promot to manager" : "Demote to employee"}
+            {role == "employee" ? "Promote to manager" : "Demote to employee"}
           </MenuItem>
         )}
 

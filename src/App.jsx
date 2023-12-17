@@ -7,6 +7,7 @@ import { setUser } from "./redux/features/auth/authSlice";
 
 const App = () => {
   const [profile, data, isError] = useAuthCheck();
+
   const dispatch = useDispatch();
   useEffect(() => {
     profile();

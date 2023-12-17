@@ -7,7 +7,7 @@ import { setQuery } from "../../redux/features/dashboard/dashboardSlice";
 const Dashboard = () => {
   const { query } = useSelector((state) => state.dashboard);
   const { data: results, isLoading, refetch } = useGetEmployeesQuery(query);
-  const [varified, setvarified] = useState(true);
+  const [verified, setverified] = useState(true);
   const [role, setrole] = useState("employee");
   const [currentPage, setCurrentPage] = useState(1);
   const [name, setName] = useState("");
@@ -18,10 +18,10 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(
       setQuery(
-        `?varified=${varified}&role=${role}&name=${name}&page=${currentPage}&sort=${sort}`
+        `?verified=${verified}&role=${role}&name=${name}&page=${currentPage}&sort=${sort}`
       )
     );
-  }, [varified, role, dispatch, currentPage, name, sort]);
+  }, [verified, role, dispatch, currentPage, name, sort]);
 // main function
   return (
     <div className="h-screen">
@@ -31,7 +31,7 @@ const Dashboard = () => {
         <EmployeeTable
           results={results}
           setrole={setrole}
-          setvarified={setvarified}
+          setverified={setverified}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           setName={setName}

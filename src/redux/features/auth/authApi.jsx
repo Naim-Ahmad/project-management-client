@@ -19,7 +19,7 @@ const authApi = api.injectEndpoints({
     }),
     profile: builder.mutation({
       query: () => ({
-        url: "/auth/varifyLogin",
+        url: "/auth/verifyLogin",
         method: "POST",
         credentials: "include",
         body: {},
