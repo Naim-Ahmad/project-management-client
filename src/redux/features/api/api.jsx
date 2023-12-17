@@ -1,9 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+const env = import.meta.env
+
 const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://project-management-server-seven.vercel.app",
+    baseUrl: env.VITE_BASE_URL,
     prepareHeaders: (headers) => {
       headers.set("content-type", "application/json");
       return headers;
