@@ -7,6 +7,7 @@ import ProjectModal from "../components/ProjectModal/ProjectModal";
 const DashboardLayout = () => {
   const { showNav } = useSelector((state) => state.dashboard);
   const { loading } = useSelector((state) => state.auth);
+  const { modalOpen } = useSelector((state) => state.project);
   if (loading) return <div>Auth checking...</div>;
   return (
     <section className=" flex ">
@@ -23,7 +24,7 @@ const DashboardLayout = () => {
         </div>
       </div>
       {/* modal for create project */}
-      <ProjectModal />
+      {modalOpen && <ProjectModal />}
     </section>
   );
 };
