@@ -2,10 +2,12 @@ import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import DashboardNav from "./dashboardNav/DashboardNav";
 import { Sidebar } from "./sidebar/Sidebar";
+import ProjectModal from "../components/ProjectModal/ProjectModal";
 
-const DashbordLayout = () => {
+const DashboardLayout = () => {
   const { showNav } = useSelector((state) => state.dashboard);
   const { loading } = useSelector((state) => state.auth);
+  const { modalOpen } = useSelector((state) => state.project);
   if (loading) return <div>Auth checking...</div>;
   return (
     <section className=" flex ">
@@ -21,8 +23,10 @@ const DashbordLayout = () => {
           <Outlet />
         </div>
       </div>
+      {/* modal for create project */}
+      {modalOpen && <ProjectModal />}
     </section>
   );
 };
 
-export default DashbordLayout;
+export default DashboardLayout;
