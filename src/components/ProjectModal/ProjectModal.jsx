@@ -6,9 +6,13 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { setModalOpen } from "../../redux/features/project/projectSlice";
+import { useCreateProjectMutation } from "../../redux/features/project/projectApi";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 export default function ProjectModal() {
   const { modalOpen } = useSelector((state) => state.project);
+  const [createProject, { data, isError }] = useCreateProjectMutation();
   const dispatch = useDispatch();
 
   const handleClose = () => {
@@ -20,8 +24,29 @@ export default function ProjectModal() {
     const name = form.name.value;
     const description = form.description.value;
     // send post request
-    console.log(name, description);
+    createProject({ name, description });
   };
+  useEffect(() => {
+    if (data?.project?._id) {
+        // first model willbe close then alert willbe show
+      dispatch(setModalOpen(false));
+      Swal.fire({
+        title: "Welcome",
+        text: "Project initiated successfully",
+        icon: "success",
+      });
+    }
+    if (isError) {
+      // first model willbe close then alert willbe show
+      dispatch(setModalOpen(false));
+
+      Swal.fire({
+        title: "Error",
+        text: "Something wrong please try again",
+        icon: "error",
+      });
+    }
+  }, [data, dispatch, isError]);
 
   return (
     <>

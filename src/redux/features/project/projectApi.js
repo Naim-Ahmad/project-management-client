@@ -9,6 +9,14 @@ const projectApi = api.injectEndpoints({
         credentials: "include",
       }),
     }),
+    createProject: builder.mutation({
+      query: (data) => ({
+        url: "/projects",
+        method: "POST",
+        credentials: "include",
+        body: data,
+      }),
+    }),
   }),
 });
-export const { useGetProjectsQuery } = projectApi;
+export const { useGetProjectsQuery, useCreateProjectMutation } = projectApi;
