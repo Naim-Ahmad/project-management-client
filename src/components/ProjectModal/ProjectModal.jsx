@@ -20,6 +20,7 @@ export default function ProjectModal() {
     const name = form.name.value;
     const description = form.description.value;
     // send post request
+    console.log(name, description);
   };
 
   return (
