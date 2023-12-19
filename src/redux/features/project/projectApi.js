@@ -8,6 +8,7 @@ const projectApi = api.injectEndpoints({
         method: "GET",
         credentials: "include",
       }),
+      providesTags: ["Projects"],
     }),
     createProject: builder.mutation({
       query: (data) => ({
@@ -16,20 +17,8 @@ const projectApi = api.injectEndpoints({
         credentials: "include",
         body: data,
       }),
-    }),
-
-    createTask: builder.mutation({
-      query: (data) => ({
-        url: "/tasks",
-        method: "POST",
-        credentials: "include",
-        body: data,
-      }),
+      invalidatesTags: ["Projects"],
     }),
   }),
 });
-export const {
-  useGetProjectsQuery,
-  useCreateProjectMutation,
-  useCreateTaskMutation,
-} = projectApi;
+export const { useGetProjectsQuery, useCreateProjectMutation } = projectApi;
