@@ -7,8 +7,14 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { GoPlus } from 'react-icons/go';
-import useToggler from '../../../hooks/toggler/useToggler';
-import TaskList from './TaskLIst';
+
+import CommentIcon from '@mui/icons-material/Comment';
+import Checkbox from '@mui/material/Checkbox';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 
 
 
@@ -32,11 +38,8 @@ export default function OutlinedCard({ data }) {
         setChecked(newChecked);
     };
 
-
-    const [toggle, handleToggle] = useToggler()
-
     const handleAddTask = () => {
-        handleToggle()
+
     }
 
     return (
@@ -60,7 +63,36 @@ export default function OutlinedCard({ data }) {
                                         </Tooltip>
                                     </Box>
 
-                                    <TaskList />
+                                    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                                        {[0, 1, 2, 3].map((value) => {
+                                            const labelId = `checkbox-list-label-${value}`;
+
+                                            return (
+                                                <ListItem
+                                                    key={value}
+                                                    secondaryAction={
+                                                        <IconButton edge="end" aria-label="comments">
+                                                            <CommentIcon />
+                                                        </IconButton>
+                                                    }
+                                                    disablePadding
+                                                >
+                                                    <ListItemButton role={undefined} onClick={handleCheck(value)} dense>
+                                                        <ListItemIcon>
+                                                            <Checkbox
+                                                                edge="start"
+                                                                checked={checked.indexOf(value) !== -1}
+                                                                tabIndex={-1}
+                                                                disableRipple
+                                                                inputProps={{ 'aria-labelledby': labelId }}
+                                                            />
+                                                        </ListItemIcon>
+                                                        <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+                                                    </ListItemButton>
+                                                </ListItem>
+                                            );
+                                        })}
+                                    </List>
 
                                 </CardContent>
                                 <CardActions>
