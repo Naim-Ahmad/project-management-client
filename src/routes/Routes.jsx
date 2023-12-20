@@ -5,6 +5,7 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Dashboard from "../pages/dashbord/Dashboard";
 import Projects from "../pages/dashbord/workSpace/Projects";
+import ProjectDetails from "../pages/dashbord/workSpace/projectDetails/ProjectDetails";
 import Home from "../pages/home/Home";
 import ManagerRoute from "./ManagerRoute";
 import PublicRoute from "./PublicRoute";
@@ -53,6 +54,15 @@ const router = createBrowserRouter([
         element: (
           <ManagerRoute>
             <Projects />
+          </ManagerRoute>
+        ),
+      },
+
+      {
+        path: "projectDetails/:id",
+        element: (
+          <ManagerRoute>
+            <ProjectDetails />
           </ManagerRoute>
         ),
       },

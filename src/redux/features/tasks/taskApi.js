@@ -10,7 +10,14 @@ const taskApi = api.injectEndpoints({
         body: data,
       }),
     }),
+    getTaskById: builder.query({
+      query: (id) => ({
+        url: `/tasks/${id}`,
+        method: "GET",
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
-export const { useCreateTaskMutation } = taskApi;
+export const { useCreateTaskMutation, useGetTaskByIdQuery } = taskApi;
