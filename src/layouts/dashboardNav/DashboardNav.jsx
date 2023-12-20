@@ -13,6 +13,7 @@ const DashboardNav = () => {
   const handelModalOpen = () => {
     dispatch(setModalOpen(true));
   };
+  
   return (
     <nav className="border-b border-[#E3EBF6] shadow text-blue-300 sticky top-0 z-40 bg-white">
       <div className="flex items-center justify-between p-4">

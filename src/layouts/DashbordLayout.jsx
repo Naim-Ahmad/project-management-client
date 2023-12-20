@@ -15,7 +15,7 @@ const DashboardLayout = () => {
 
   useEffect(() => {
     const unsubscribe = window.onresize = () => {
-      if (window.innerWidth > 768) {
+      if (window.innerWidth > 1024) {
         dispatch(setShowNav(true))
       } else {
         dispatch(setShowNav(false))
@@ -29,7 +29,7 @@ const DashboardLayout = () => {
   return (
     <section className=" flex ">
       {showNav && (
-        <div className="lg:sticky top-0 lg:left-0 h-[100svh] transition-all duration-300">
+        <div className="absolute z-10 lg:sticky top-0 lg:left-0 h-[100svh] transition-all duration-300">
           <Sidebar />
         </div>
       )}
