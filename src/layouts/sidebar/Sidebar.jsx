@@ -58,7 +58,7 @@ export function Sidebar() {
   };
 
   return (
-    <Card className=" sticky w-full max-w-xs p-4 rounded-none  bg-white shadow text-color-gray">
+    <Card className=" sticky w-full h-full max-w-xs p-4 rounded-none  bg-white shadow text-color-gray">
       <div className="mb-2 p-4">
         <Typography variant="h5" color="blue-gray">
           MERN

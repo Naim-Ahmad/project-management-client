@@ -10,10 +10,6 @@ const DashboardNav = () => {
   const { showNav } = useSelector((state) => state.dashboard);
   const dispatch = useDispatch();
 
-  // console.log(showNav)
-  const handelNavbar = () => {
-    dispatch(setShowNav());
-  };
   const handelModalOpen = () => {
     dispatch(setModalOpen(true));
   };
@@ -25,13 +21,13 @@ const DashboardNav = () => {
             <LuPanelLeftClose
               size={25}
               className="cursor-pointer"
-              onClick={handelNavbar}
+              onClick={()=> dispatch(setShowNav(false))}
             />
           ) : (
             <LuPanelRightClose
               size={25}
               className="cursor-pointer"
-              onClick={handelNavbar}
+              onClick={()=> dispatch(setShowNav(true))}
             />
           )}
           <div
