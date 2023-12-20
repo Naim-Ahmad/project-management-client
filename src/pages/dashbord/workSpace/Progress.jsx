@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
+import { Tooltip, Typography } from "@mui/material";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
@@ -19,12 +20,17 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 export default function CustomizedProgressBars({ tasks }) {
-  const value = tasks?.length * 10;
-  const compleateTasksValue=tasks?.filter(task=>task.compleat)
+  const compleatTasksValue = tasks?.filter((task) => task.completed);
+  // calculate progress bar value
+  const progress = Math.round(
+    (compleatTasksValue.length * 100) / tasks?.length
+  );
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <br />
-      <BorderLinearProgress variant="determinate" value={value} />
+      <Tooltip title={`${progress}% compleat`}>
+        <BorderLinearProgress variant="determinate" value={progress} />
+      </Tooltip>
     </Box>
   );
 }
