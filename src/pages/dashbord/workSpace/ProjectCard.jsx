@@ -6,10 +6,7 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { GoPlus } from "react-icons/go";
 
-<<<<<<< HEAD
-=======
 import { Link } from "react-router-dom";
->>>>>>> bc89a982db3e63194e3d34c76719fe8958160fdc
 import CustomizedProgressBars from "./Progress";
 
 export default function OutlinedCard({ data }) {
@@ -17,45 +14,13 @@ export default function OutlinedCard({ data }) {
   const { _id, name, description, complete, tasks, createdBy, creationTime } =
     data;
 
-
-  const handleAddTask = () => { };
+  const handleAddTask = () => {};
 
   return (
     <>
       {/* <TaskModal open={toggle} handleOpen={handleCheck} data={data} /> */}
       <Grid container>
         <Grid item xs={12} md={6} lg={4}>
-<<<<<<< HEAD
-          <Box sx={{ minWidth: 275 }}>
-            <Card variant="outlined">
-              <React.Fragment>
-                <CardContent>
-                  <Box display="flex" justifyContent="space-between">
-                    <Typography variant="h6" component="h6" fontSize={16}>
-                      {name.length > 22 ? `${name.slice(0, 22)}...` : name}
-                    </Typography>
-
-                    <Tooltip
-                      onClick={handleAddTask}
-                      title="Add Task"
-                      placement="top"
-                    >
-                      <IconButton>
-                        <GoPlus className="font-semibold text-2xl" />
-                      </IconButton>
-                    </Tooltip>
-                  </Box>
-                  {tasks?.length > 0 && (
-                    <CustomizedProgressBars tasks={tasks} />
-                  )}
-                </CardContent>
-                <CardActions>
-                  <Button size="small">Learn More</Button>
-                </CardActions>
-              </React.Fragment>
-            </Card>
-          </Box>
-=======
           <Link to={`/dashboard/projectDetails/${_id}`}>
             <Box sx={{ minWidth: 275 }}>
               <Card variant="outlined">
@@ -79,15 +44,11 @@ export default function OutlinedCard({ data }) {
                     {tasks?.length > 0 && (
                       <CustomizedProgressBars tasks={tasks} />
                     )}
-
-
                   </CardContent>
-
                 </React.Fragment>
               </Card>
             </Box>
           </Link>
->>>>>>> bc89a982db3e63194e3d34c76719fe8958160fdc
         </Grid>
       </Grid>
     </>
