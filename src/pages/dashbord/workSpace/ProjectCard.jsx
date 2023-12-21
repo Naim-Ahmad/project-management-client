@@ -28,7 +28,7 @@ export default function OutlinedCard({ data }) {
                   <CardContent>
                     <Box display="flex" justifyContent="space-between">
                       <Typography variant="h6" component="h6" fontSize={16}>
-                        {name}
+                        {name.length > 21 ? `${name.slice(0, 21)}...` : name}
                       </Typography>
 
                       <Tooltip
