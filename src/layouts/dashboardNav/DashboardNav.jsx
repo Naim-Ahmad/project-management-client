@@ -10,13 +10,10 @@ const DashboardNav = () => {
   const { showNav } = useSelector((state) => state.dashboard);
   const dispatch = useDispatch();
 
-  // console.log(showNav)
-  const handelNavbar = () => {
-    dispatch(setShowNav());
-  };
   const handelModalOpen = () => {
     dispatch(setModalOpen(true));
   };
+  
   return (
     <nav className="border-b border-[#E3EBF6] shadow text-blue-300 sticky top-0 z-40 bg-white">
       <div className="flex items-center justify-between p-4">
@@ -25,13 +22,13 @@ const DashboardNav = () => {
             <LuPanelLeftClose
               size={25}
               className="cursor-pointer"
-              onClick={handelNavbar}
+              onClick={()=> dispatch(setShowNav(false))}
             />
           ) : (
             <LuPanelRightClose
               size={25}
               className="cursor-pointer"
-              onClick={handelNavbar}
+              onClick={()=> dispatch(setShowNav(true))}
             />
           )}
           <div
