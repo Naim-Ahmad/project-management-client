@@ -1,36 +1,59 @@
-import { styled } from "@mui/material/styles";
+import PropTypes from "prop-types";
+import CircularProgress from "@mui/material/CircularProgress";
+import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
-import LinearProgress, {
-  linearProgressClasses,
-} from "@mui/material/LinearProgress";
-import { Tooltip, Typography } from "@mui/material";
+function CustomizedProgressBars(props) {
+  return (
+    <Box sx={{ position: "relative", display: "inline-flex" }}>
+      <CircularProgress
+        variant="determinate"
+        color="info"
+        {...props}
+        sx={{
+          color: (theme) =>
+          theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+        }}
+        size={40}
+        thickness={4}
+        {...props}
+        value={props.value}
+      />
+      <Box
+        sx={{
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          position: "absolute",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Typography variant="caption" component="div" color="text.secondary">
+          {`${Math.round(props.value)}%`}
+        </Typography>
+      </Box>
+    </Box>
+  );
+}
 
-const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
-  height: 10,
-  borderRadius: 5,
-  [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor:
-      theme.palette.grey[theme.palette.mode === "light" ? 200 : 800],
-  },
-  [`& .${linearProgressClasses.bar}`]: {
-    borderRadius: 5,
-    backgroundColor: theme.palette.mode === "light" ? "#1a90ff" : "#308fe8",
-  },
-}));
+CustomizedProgressBars.propTypes = {
+  /**
+   * The value of the progress indicator for the determinate variant.
+   * Value between 0 and 100.
+   * @default 0
+   */
+  value: PropTypes.number.isRequired,
+};
 
-export default function CustomizedProgressBars({ tasks }) {
+export default function CircularWithValueLabel({ tasks }) {
   const compleatTasksValue = tasks?.filter((task) => task.completed);
   // calculate progress bar value
   const progress = Math.round(
     (compleatTasksValue.length * 100) / tasks?.length
   );
 
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Tooltip title={`${progress}% compleat`}>
-        <BorderLinearProgress variant="determinate" value={progress} />
-      </Tooltip>
-    </Box>
-  );
+  return <CustomizedProgressBars value={progress} />;
 }

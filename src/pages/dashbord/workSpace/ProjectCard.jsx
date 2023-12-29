@@ -5,9 +5,11 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { GoPlus } from "react-icons/go";
+import { IoCreateSharp } from "react-icons/io5";
 
 import { Link } from "react-router-dom";
-import CustomizedProgressBars from "./Progress";
+
+import CircularWithValueLabel from "./Progress";
 
 export default function OutlinedCard({ data }) {
   // console.log(Object.keys(data).join(','))
@@ -42,8 +44,16 @@ export default function OutlinedCard({ data }) {
                       </Tooltip>
                     </Box>
                     {tasks?.length > 0 && (
-                      <CustomizedProgressBars tasks={tasks} />
+                      <CircularWithValueLabel tasks={tasks} />
                     )}
+                    <Box>
+                      <div className="flex items-center space-x-1">
+                        <IoCreateSharp />{" "}
+                        <h1 className="capitalize">
+                          {createdBy?.firstName} {createdBy?.lastName}
+                        </h1>
+                      </div>
+                    </Box>
                   </CardContent>
                 </React.Fragment>
               </Card>
