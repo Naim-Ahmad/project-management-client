@@ -19,7 +19,7 @@ export default function ProjectDetails() {
     
 
     return (
-        <Grid container spacing={4}>
+        <Grid container spacing={4} sx={{minHeight: '90svh'}}>
             <Grid item xs={12} md={6}>
                 <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                     {data?.map((value) => <TaskList key={value._id} value={value}/>)}

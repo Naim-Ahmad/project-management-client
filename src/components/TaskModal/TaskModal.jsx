@@ -6,11 +6,13 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
+import { useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import Swal from "sweetalert2";
 import { useCreateTaskMutation } from "../../redux/features/tasks/taskApi";
 
 export default function TaskModal({ open, handleOpen, data: projectData }) {
-  const [createTask, { data, isError }] = useCreateTaskMutation();
+  const [createTask, { data, isError, isSuccess }] = useCreateTaskMutation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,16 +27,19 @@ export default function TaskModal({ open, handleOpen, data: projectData }) {
       projectId: projectData?._id,
     };
     createTask(taskInfo);
+    handleOpen();
   };
 
   // console.log(data)
 
-  if (data?._id) {
-    handleOpen();
-  }
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success('Task Added')
+    }
+  }, [])
+
 
   if (isError) {
-    handleOpen();
     Swal.fire({
       title: "Error",
       text: "Something wrong please try again",
@@ -43,34 +48,47 @@ export default function TaskModal({ open, handleOpen, data: projectData }) {
   }
 
   return (
-    <Dialog open={open} onClose={handleOpen}>
-      <DialogTitle>Create new project</DialogTitle>
-      <form onSubmit={handleSubmit}>
-        <DialogContent>
-          <TextField
-            margin="dense"
-            label="Task Title"
-            name="title"
-            type="text"
-            fullWidth
-            variant="standard"
-            required
-          />
-          <TextField
-            margin="dense"
-            name="description"
-            label="Description"
-            type="text"
-            rows={10}
-            fullWidth
-            variant="standard"
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleOpen}>Cancel</Button>
-          <Button type="submit">Create</Button>
-        </DialogActions>
-      </form>
-    </Dialog>
+    <>
+      <Toaster />
+      <Dialog open={open} onClose={handleOpen}>
+        <DialogTitle p={0}>Create new Task</DialogTitle>
+        <form onSubmit={handleSubmit}>
+          <DialogContent style={{ paddingTop: '0px' }}>
+            <TextField
+              margin="dense"
+              label="Task Title"
+              name="title"
+              type="text"
+              fullWidth
+              variant="standard"
+              required
+            />
+            <TextField
+              margin="dense"
+              name="description"
+              label="Description"
+              type="text"
+              rows={10}
+              fullWidth
+              variant="standard"
+            />
+
+            <TextField
+              margin="dense"
+              name="description"
+              // label="Description"
+              type="date"
+              rows={10}
+              fullWidth
+              variant="standard"
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleOpen}>Cancel</Button>
+            <Button type="submit">Create</Button>
+          </DialogActions>
+        </form>
+      </Dialog>
+    </>
   );
 }
