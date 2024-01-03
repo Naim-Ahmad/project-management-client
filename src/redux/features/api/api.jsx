@@ -14,7 +14,7 @@ const api = createApi({
 
   endpoints: () => ({}),
   keepUnusedDataFor: 120,
-  tagTypes: ["Employees"],
+  tagTypes: ["Employees","Projects"],
 });
 
 export default api;

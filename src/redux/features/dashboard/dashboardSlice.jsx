@@ -8,8 +8,9 @@ const dashboardSlice = createSlice({
   name: "dashboard",
   initialState,
   reducers: {
-    setShowNav: (state) => {
-      state.showNav = !state.showNav;
+    setShowNav: (state, action) => {
+      // console.log(action)
+      state.showNav = action.payload;
     },
     setQuery: (state, action) => {
       state.query = action.payload;
